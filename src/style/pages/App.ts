@@ -42,3 +42,64 @@ export const DivInputStyled = styled('div', {
         fontWeight: 700,
     },
 })
+
+export const DivContainer = styled('div', {
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+
+    marginTop: '4rem',
+})
+
+export const DivContainer2 = styled('div', {
+    //backgroundColor: '$--blue--dark',
+    width: '46.5rem',
+})
+
+export const DivListInfo = styled('div', {
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    div: {
+
+    }
+})
+
+export const DivListCriadas = styled('div', {
+    display: 'flex',
+    gap: 10,
+    color: '$--blue',
+    fontWeight: '700',
+
+    div: {
+        textAlign: 'center',
+        padding: '0 1rem 0 1rem',
+        color: '$--gray-200',
+        backgroundColor: '$--gray-400',
+        borderRadius: '5rem',
+        fontWeight: '400'
+    }
+})
+
+export const DivListConcluidas = styled('div', {
+    display: 'flex',
+    gap: 10,
+    color: '$--purple',
+    fontWeight: '700',
+
+    div: {
+        textAlign: 'center',
+        padding: '0 1rem 0 1rem',
+        color: '$--gray-200',
+        backgroundColor: '$--gray-400',
+        borderRadius: '5rem',
+        fontWeight: '400'
+    }
+})
+
+export const DivList = styled('div', {
+    marginTop: '2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.2rem',
+})
