@@ -32,8 +32,10 @@ export default function App() {
     setTask([...task, taskName]);
   }
 
-  function hadleRemoveTask() {
-    const newAarrayTask = task.filter((task) => {});
+  function hadleRemoveTask(taskText: string) {
+    const newAarrayTask = task.filter((task) => {
+      task != taskText;
+    });
     setTask(newAarrayTask);
   }
 
