@@ -15,6 +15,11 @@ import Task from "./components/task";
 import { ChangeEvent, useState } from "react";
 import Clip from "./assets/Clipboard.svg";
 
+interface task {
+  id: number;
+  task: string;
+}
+
 export default function App() {
   const [taskName, setTaskName] = useState<string>("");
   const [task, setTask] = useState<string[]>([]);
@@ -26,6 +31,13 @@ export default function App() {
   function handleNewTask() {
     setTask([...task, taskName]);
   }
+
+  function hadleRemoveTask() {
+    const newAarrayTask = task.filter((task) => {});
+    setTask(newAarrayTask);
+  }
+
+  const isTaskNameEmpty = taskName.length === 0;
   return (
     <>
       <DivStyledHeader>
@@ -39,8 +51,13 @@ export default function App() {
           value={taskName}
           placeholder="Adicione uma nova tarefa"
           onChange={handleTaskName}
+          required
         />
-        <button type="button" onClick={handleNewTask}>
+        <button
+          type="button"
+          onClick={handleNewTask}
+          disabled={isTaskNameEmpty}
+        >
           Criar
           <img src={lupa} />
         </button>
@@ -62,7 +79,7 @@ export default function App() {
           <DivList>
             {task.length ? (
               task.map((task) => {
-                return <Task tasktext={task} />;
+                return <Task tasktext={task} taskDelete={hadleRemoveTask} />;
               })
             ) : (
               <DivStyledEmpty>

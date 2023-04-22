@@ -3,14 +3,15 @@ import lixo from "../assets/trash.svg";
 
 interface taskProps {
   tasktext: string;
+  taskDelete: () => void;
 }
 
-export default function Task({ tasktext }: taskProps) {
+export default function Task({ tasktext, taskDelete }: taskProps) {
   return (
     <StyledTaskContainer>
       <input type="checkbox" />
       <span>{tasktext}</span>
-      <button>
+      <button onClick={taskDelete}>
         <img src={lixo} />
       </button>
     </StyledTaskContainer>
