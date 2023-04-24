@@ -15,9 +15,10 @@ import Task from "./components/task";
 import { ChangeEvent, useState } from "react";
 import Clip from "./assets/Clipboard.svg";
 
-interface task {
+interface task  {
   id: number;
   task: string;
+  isDone: boolean
 }
 
 export default function App() {
@@ -32,13 +33,12 @@ export default function App() {
     setTask([...task, taskName]);
   }
 
-  function hadleRemoveTask(taskText: string) {
-    const newAarrayTask = task.filter((task) => {
-      task != taskText;
-    });
-    setTask(newAarrayTask);
-  }
+  function handleRemoveTask(comment: string) {
+    const newCommentList = task.filter(x => x != comment)
 
+    setTask(newCommentList)
+  }
+  
   const isTaskNameEmpty = taskName.length === 0;
   return (
     <>
@@ -74,14 +74,14 @@ export default function App() {
             </DivListCriadas>
             <DivListConcluidas>
               <span>Concluídas</span>
-              <div>2 de 5</div>
+              <div>2 de {task.length}</div>
             </DivListConcluidas>
           </DivListInfo>
 
           <DivList>
             {task.length ? (
               task.map((task) => {
-                return <Task tasktext={task} taskDelete={hadleRemoveTask} />;
+                return <Task tasktext={task} onDelete={handleRemoveTask}/>;
               })
             ) : (
               <DivStyledEmpty>

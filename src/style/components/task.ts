@@ -16,7 +16,7 @@ export const StyledTaskContainer = styled("div", {
         marginLeft: '1rem',
         color: '$--gray-100',
         fontSize: '1rem',
-        fontWeight: '300'
+        fontWeight: '300',
     },
 
     button: {
