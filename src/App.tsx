@@ -25,6 +25,7 @@ export default function App() {
   const [taskName, setTaskName] = useState<string>("");
   const [id, setId] =useState<number>(0)
   const [task, setTask] = useState<task[]>([]);
+  const [checked, setChecked] = useState<boolean>(false);
 
   function handleTaskName(event: ChangeEvent<HTMLInputElement>) {
     setTaskName(event.target.value);
@@ -34,7 +35,7 @@ export default function App() {
     const newObjTask = {
       id: id,
       tasknm: taskName,
-      isDone: false
+      isDone: checked
     }
     setTask([...task, newObjTask]);
     setId(id + 1)
@@ -45,7 +46,13 @@ export default function App() {
 
     setTask(newCommentList)
   }
-  
+
+  function handleCheckTask (event: boolean) {
+    setChecked(event)
+  }
+
+  console.log(task)
+
   const isTaskNameEmpty = taskName.length === 0;
   return (
     <>
@@ -81,14 +88,14 @@ export default function App() {
             </DivListCriadas>
             <DivListConcluidas>
               <span>Concluídas</span>
-              <div>2 de {task.length}</div>
+              <div>{0} de {task.length}</div>
             </DivListConcluidas>
           </DivListInfo>
 
           <DivList>
             {task.length ? (
               task.map((task) => {
-                return <Task key={task.id} props={task} onDelete={handleRemoveTask}/>;
+                return <Task key={task.id} props={task} onDelete={handleRemoveTask} onCheck={handleCheckTask}/>;
               })
             ) : (
               <DivStyledEmpty>

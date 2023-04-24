@@ -6,23 +6,24 @@ import { task } from "../App";
 interface taskProps {
   props: task,
   onDelete: (id: number) => void
+  onCheck: (isDone: boolean) => void
 }
 
-export default function Task({ props, onDelete }: taskProps) {
-  const [checked, setChecked] = useState(false);
+export default function Task({ props, onDelete, onCheck }: taskProps) {
+  //const [checked, setChecked] = useState(false);
 
   function handleRemove() {
     onDelete(props.id)
   }
 
-  function isChecked(event: ChangeEvent<HTMLInputElement>) {
-    setChecked(event.target.checked)
+  function isChecked() {
+    onCheck(!props.isDone)
   }
 
   return (
     <StyledTaskContainer>
-      <input type="checkbox" onChange={isChecked} />
-      <span style={checked ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{props.tasknm}</span>
+      <input type="checkbox" onClick={onCheck} />
+      <span style={props.isDone ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{props.tasknm}</span>
       <button onClick={handleRemove}>
         <img src={lixo} />
       </button>
