@@ -9,7 +9,7 @@ interface taskProps {
 }
 
 export default function Task({ props, onDelete }: taskProps) {
-  const [checked, setChecked] = useState(false) 
+  const [checked, setChecked] = useState(false);
 
   function handleRemove() {
     onDelete(props.id)
