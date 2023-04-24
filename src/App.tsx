@@ -15,26 +15,33 @@ import Task from "./components/task";
 import { ChangeEvent, useState } from "react";
 import Clip from "./assets/Clipboard.svg";
 
-interface task  {
+export interface task  {
   id: number;
-  task: string;
+  tasknm: string;
   isDone: boolean
 }
 
 export default function App() {
   const [taskName, setTaskName] = useState<string>("");
-  const [task, setTask] = useState<string[]>([]);
+  const [id, setId] =useState<number>(0)
+  const [task, setTask] = useState<task[]>([]);
 
   function handleTaskName(event: ChangeEvent<HTMLInputElement>) {
     setTaskName(event.target.value);
   }
 
   function handleNewTask() {
-    setTask([...task, taskName]);
+    const newObjTask = {
+      id: id,
+      tasknm: taskName,
+      isDone: false
+    }
+    setTask([...task, newObjTask]);
+    setId(id + 1)
   }
 
-  function handleRemoveTask(comment: string) {
-    const newCommentList = task.filter(x => x != comment)
+  function handleRemoveTask(id: number) {
+    const newCommentList = task.filter(x => x.id != id)
 
     setTask(newCommentList)
   }
@@ -81,7 +88,7 @@ export default function App() {
           <DivList>
             {task.length ? (
               task.map((task) => {
-                return <Task tasktext={task} onDelete={handleRemoveTask}/>;
+                return <Task key={task.id} props={task} onDelete={handleRemoveTask}/>;
               })
             ) : (
               <DivStyledEmpty>
