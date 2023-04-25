@@ -15,15 +15,15 @@ import Task from "./components/task";
 import { ChangeEvent, useState } from "react";
 import Clip from "./assets/Clipboard.svg";
 
-export interface task  {
+export interface task {
   id: number;
   tasknm: string;
-  isDone: boolean
+  isDone: boolean;
 }
 
 export default function App() {
   const [taskName, setTaskName] = useState<string>("");
-  const [id, setId] =useState<number>(0)
+  const [id, setId] = useState<number>(0);
   const [task, setTask] = useState<task[]>([]);
   const [checked, setChecked] = useState<boolean>(false);
 
@@ -35,25 +35,32 @@ export default function App() {
     const newObjTask = {
       id: id,
       tasknm: taskName,
-      isDone: checked
-    }
+      isDone: checked,
+    };
     setTask([...task, newObjTask]);
-    setId(id + 1)
+    setId(id + 1);
   }
 
   function handleRemoveTask(id: number) {
-    const newCommentList = task.filter(x => x.id != id)
+    const newCommentList = task.filter((x) => x.id != id);
 
-    setTask(newCommentList)
+    setTask(newCommentList);
   }
 
-  function handleCheckTask (event: boolean) {
-    setChecked(event)
-  }
+  function handleCheckTask(event: boolean, id: number) {
+    const taskList = task.map((task) => {
+      if (task.id === id) {
+        task.isDone = event;
+      }
 
-  console.log(task)
+      return task;
+    });
+
+    setTask(taskList);
+  }
 
   const isTaskNameEmpty = taskName.length === 0;
+  const completeList = task.filter((task) => task.isDone === true);
   return (
     <>
       <DivStyledHeader>
@@ -88,14 +95,23 @@ export default function App() {
             </DivListCriadas>
             <DivListConcluidas>
               <span>Concluídas</span>
-              <div>{0} de {task.length}</div>
+              <div>
+                {completeList.length} de {task.length}
+              </div>
             </DivListConcluidas>
           </DivListInfo>
 
           <DivList>
             {task.length ? (
               task.map((task) => {
-                return <Task key={task.id} props={task} onDelete={handleRemoveTask} onCheck={handleCheckTask}/>;
+                return (
+                  <Task
+                    key={task.id}
+                    props={task}
+                    onDelete={handleRemoveTask}
+                    onCheck={handleCheckTask}
+                  />
+                );
               })
             ) : (
               <DivStyledEmpty>
